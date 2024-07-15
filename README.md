@@ -6,6 +6,14 @@ The server integration doesn't fully work with multiple threads due to race cond
 
 **Tech Stack**: LangChain, FastAPI
 
+## Quickstart
+- use [devenv](https://devenv.sh) or [poetry](https://python-poetry.org/) to load the dependencies (as per listed in requirements.txt), alternatively use `pip install -r requirements` if you don't want to use any of the package manager.
+- initialize the environment variable needed as per indicated in `sample_secrets.txt`
+- start the server: `fastapi run`
+
+### Deployment
+Dockerfile is included but due to the race condition issue, the program would not work properly with uvicorn worker threads.
+
 ## Email Integration
 As the test email used is Zoho mail, we used the Zoho API to read new mails and reply them which is not ideal, as gpt generated emails still need reviewing. 
 

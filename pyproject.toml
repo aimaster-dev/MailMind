@@ -14,6 +14,7 @@ openai = "^1.35.13"
 chromadb = "^0.5.4"
 tiktoken = "^0.7.0"
 fastapi = "^0.111.0"
+pysqlite3-binary = "^0.5.3"
 
 
 [build-system]
