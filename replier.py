@@ -14,12 +14,6 @@ from langchain.chains import RetrievalQA, TransformChain, sequential
 from langchain_community.document_loaders import TextLoader
 from langchain.prompts import PromptTemplate
 
-# get from https://platform.openai.com/
-# os.environ["OPENAI_API_KEY"] = "<OPENAI_API_KEY>"
-
-# get from https://nla.zapier.com/demo/provider/debug (under User Information, after logging in): 
-# os.environ["ZAPIER_NLA_API_KEY"] = "<ZAPIER_NLA_API_KEY>"
-
 def main(zc, endFunc = lambda : None):
     loader = TextLoader(os.path.join(os.environ['RAG_TXT_PATH'], "qa.txt"))
     documents = loader.load()
@@ -96,16 +90,5 @@ def main(zc, endFunc = lambda : None):
         invoked.update({'email_data' :email})
         invoked.update({'draft_reply' : formatting_chain.invoke({'input': invoked['draft_reply'], 'email_data': email})})
         schedule_msg(invoked)
-    # content = """
-    # Hi,
-
-    # I have missed the gown fitting timeline may I know if it is possible for me to come on the weekends to try and collect the gown?
-
-    # Regards,
-    # Jabez Tho
-    # """
-    # print(overall_chain.invoke({"input": {'subject': 'Enquiry on gown collection', 'content': content}}))
-    # print(retrieval_chain.invoke({"question": " Is it possible for me to come on the weekends to try and collect the gown?"}))
-    # overall_chain.invoke({"input": " Is it possible for me to come on the weekends to try and collect the gown?"})
 
     endFunc()
