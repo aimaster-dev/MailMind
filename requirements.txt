@@ -1,0 +1,8 @@
+langchain
+langchain-openai
+langchain-community
+openai
+chromadb
+pysqlite3-binary
+tiktoken
+fastapi
