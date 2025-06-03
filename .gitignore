@@ -10,3 +10,5 @@ devenv.local.nix
 
 secrets*
 zoho_tokens.pkl
+.env
+sample_secrets.txt

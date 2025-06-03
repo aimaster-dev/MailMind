@@ -78,20 +78,22 @@ class ZohoClient:
         return parsed_resp['data']
 
     def markEmailsRead(self, emails):
-        url = urljoin(api_url, f'{self.acct_id}/updatemessage')
+        url = urljoin(api_url, f"{self.acct_id}/updatemessage")
         body = {
-            'mode': 'markAsRead',
-            'messageId': [email['messageId'] for email in emails], 
+            "mode": "markAsRead",
+            "messageId": [email['messageId'] for email in emails]
         }
-        parsed_resp = self.sendAndHandleError(lambda : session.update(url, json=body, headers=self.headers))
-        return parsed_resp
+        parsed_resp = self.sendAndHandleError(lambda: session.put(url, json=body, headers=self.headers))
+        logger.debug(f"Marked emails as read: {parsed_resp}")
 
-    def replyEmail(self, email, reply, schedule={}):
+    def replyEmail(self, email, reply, schedule=None):
+        if schedule is None:
+            schedule = {}
         url = urljoin(api_url, f"{self.acct_id}/messages/{email['messageId']}")
         body = {
             'fromAddress': self.acct_addr,
             # intentionally trigger error so not sent
-            'toAddress': 'doesNotExist@jabeztho.com',
+            'toAddress': 'zying1309@gmail.com',
             'subject': reply['subject'],
             'action': 'reply',
             'mode': 'draft',

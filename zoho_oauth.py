@@ -1,5 +1,7 @@
 import requests
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 redirect_uri = os.environ["ZOHO_REDIRECT_URI"]
 
@@ -22,7 +24,7 @@ def getAccessToken(code):
         'client_id': os.environ["ZOHO_CLIENT_ID"],
         'client_secret': os.environ["ZOHO_CLIENT_SECRET"],
         'redirect_uri': redirect_uri, 
-        'scope': 'ZohoMail.accounts.READ,ZohoMail.messages.ALL',
+        # 'scope': 'ZohoMail.accounts.READ,ZohoMail.messages.ALL',
         'grant_type': 'authorization_code',
     }
 
