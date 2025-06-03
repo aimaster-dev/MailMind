@@ -1,43 +1,113 @@
-# GPT Zoho Replier
+# 📬 MailMind: AI-Powered Email Draft Assistant for Zoho Mail
 
-This POC is to try to choose ChatGPT with langchain to try to auto reply emails received from customer service and answer them usiing a predefined set of Q and A messages as best as possible. 
+**MailMind** is a Python-based tool that reads incoming emails from your Zoho Mail account and uses OpenAI’s GPT models to generate smart, contextual replies. It creates draft responses directly in your inbox so you can review and send with confidence.
 
-The server integration doesn't fully work with multiple threads due to race condition on global store for access and refresh tokens. (This is just a POC that was hacked up in a day sadly - code is really quite stinky)
+---
 
-**Tech Stack**: LangChain, FastAPI
+## ✨ Features
 
-## Quickstart
-- use [devenv](https://devenv.sh) or [poetry](https://python-poetry.org/) to load the dependencies (as per listed in requirements.txt), alternatively use `pip install -r requirements` if you don't want to use any of the package manager.
-- initialize the environment variable needed as per indicated in `sample_secrets.txt`
-- start the server: `fastapi run`
+* 🔐 Secure OAuth2-based Zoho Mail integration
+* 📥 Automatically fetches unread emails
+* 💡 Uses GPT-4o or GPT-4o-mini to generate contextual replies
+* 📝 Saves replies as drafts, never sends without your review
+* 🧠 Keeps the tone helpful, polite, and human-like
+* 🔄 Marks emails as read after processing
 
-### Deployment
-Dockerfile is included but due to the race condition issue, the program would not work properly with uvicorn worker threads.
+---
 
-## Email Integration
-As the test email used is Zoho mail, we used the Zoho API to read new mails and reply them which is not ideal, as gpt generated emails still need reviewing. 
+## 📌 Use Case
 
-However due to some some limitations on the Zoho API it's impossible to draft new replies without sending them, attempt to use the scheduling feature to mock the draft feature (scheduled x years later) have also not been successful due to some mismatch in Zoho API documentation.
+Great for:
 
-Possible future enhancement is to write it as a full fledged email client instead.
+* Virtual assistants and support teams
+* Busy professionals needing smart auto-drafts
+* Customer service inboxes
+* Anyone looking to streamline routine email replies
 
-## GPT settings
-Q and A messages have embeddings generated using OpenAI's embedding model (text-embedding-ada-002) and stored in ChromaDB for vector search.
+---
 
-For our LLM model we use GPT 3.5 Turbo, which displays similar performance to GPT 4o in the excerpt we generated.
+## 🛠️ Tech Stack
 
-## Receive to Reply Pipeline:
-1. Email received as raw data from API
-2. send to LLM to summarize as a single question
-3. Retrieval Augmented Generation (RAG) to generate context to augment prompt from question
-4. Send to LLM with question and prompt to draft up reply
+* Python 3.9+
+* [Zoho Mail API](https://www.zoho.com/mail/help/api/)
+* OpenAI GPT API (`gpt-4o`, `gpt-4o-mini`)
+* Requests + LangChain
+* dotenv for config
+* Logging for traceability
 
-## Further improvements
-- Remove the usage of global store to avoid race conditions, replacing with FastAPI's session store
-- Generic interface to incorporate multiple email service providers (Or rewrite as full fat email client : TOUGH)
-- Package it as a single encapsulated application for easy usage by end users
-- Add in type hints for compile time and runtime checks (mypy, beartype)
-- Rewrite it in Go Lang cause why not (solve type hints, packaging issue) 
+---
 
-## Acknowledgements
-The replier module was referenced from https://gist.github.com/DaveOkpare/172340a50e65a5a895d29b4c5da954dc
+## 🚀 Setup Instructions
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/your-username/mailmind.git
+cd mailmind
+```
+
+### 2. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Set environment variables
+
+Create a `.env` file in the root directory:
+
+```
+ZOHO_OAUTH_TOKEN=your_zoho_token
+OPENAI_API_KEY=your_openai_key
+```
+
+Optionally include:
+
+```
+MODEL_NAME=gpt-4o-mini  # or gpt-4o
+```
+
+### 4. Run the replier
+
+```bash
+python main.py
+```
+
+---
+
+## 🧪 Example Output
+
+After running, you’ll find draft responses in your Zoho Mail under the same thread as the incoming email. Drafts include polite, accurate responses based on the context of each message.
+
+---
+
+## 🤖 How It Works
+
+1. Authenticates with Zoho and retrieves unread messages
+2. Extracts the content and metadata
+3. Passes it to the GPT model with tailored prompts
+4. Creates a draft reply in your inbox
+5. Optionally marks the message as read
+
+---
+
+## 📷 Screenshots
+
+*(Add screenshots showing a before/after of email + draft reply in Zoho Mail)*
+
+---
+
+## ✅ To-Do / Improvements
+
+* Add UI for manual review
+* Scheduled background tasks
+* Gmail & Outlook support
+* Language style customization
+
+---
+
+## 🧠 License
+
+MIT – Use it freely and improve it as needed.
+
+---
