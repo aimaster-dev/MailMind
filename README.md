@@ -9,15 +9,23 @@
 * 🔐 Secure OAuth2-based Zoho Mail integration
 * 📥 Automatically fetches unread emails
 * 💡 Uses GPT-4o or GPT-4o-mini to generate contextual replies
-* 📝 Saves replies as drafts, never sends without your review
+* 📝 Saves replies as drafts — never sends without your review
 * 🧠 Keeps the tone helpful, polite, and human-like
 * 🔄 Marks emails as read after processing
 
 ---
 
-## 📌 Use Case
+## 📽️ Demo Video
 
-Great for:
+[![Watch the demo](https://user-images.githubusercontent.com/122913805/276920425-1a7e6483-9a83-4930-80d5-9df1cf42c97e.png)](https://drive.google.com/file/d/1Q9-GtvmsatePwTXJL5ZsC1HopcrYq3zy/view?usp=sharing)
+
+> 🔗 Click the image above to watch the demo video on **Google Drive**
+
+---
+
+## 📌 Use Cases
+
+Perfect for:
 
 * Virtual assistants and support teams
 * Busy professionals needing smart auto-drafts
@@ -32,7 +40,7 @@ Great for:
 * [Zoho Mail API](https://www.zoho.com/mail/help/api/)
 * OpenAI GPT API (`gpt-4o`, `gpt-4o-mini`)
 * Requests + LangChain
-* dotenv for config
+* `python-dotenv` for config
 * Logging for traceability
 
 ---
@@ -56,14 +64,9 @@ pip install -r requirements.txt
 
 Create a `.env` file in the root directory:
 
-```
+```env
 ZOHO_OAUTH_TOKEN=your_zoho_token
 OPENAI_API_KEY=your_openai_key
-```
-
-Optionally include:
-
-```
 MODEL_NAME=gpt-4o-mini  # or gpt-4o
 ```
 
@@ -77,37 +80,41 @@ python main.py
 
 ## 🧪 Example Output
 
-After running, you’ll find draft responses in your Zoho Mail under the same thread as the incoming email. Drafts include polite, accurate responses based on the context of each message.
+Once you run the script, you’ll find GPT-powered **draft replies** in Zoho Mail under the same thread as each unread message. Every draft is:
+
+* Contextually aware
+* Friendly and professional
+* Ready for your review and manual send
 
 ---
 
 ## 🤖 How It Works
 
 1. Authenticates with Zoho and retrieves unread messages
-2. Extracts the content and metadata
+2. Extracts content, sender info, and subject
 3. Passes it to the GPT model with tailored prompts
-4. Creates a draft reply in your inbox
-5. Optionally marks the message as read
+4. Creates a contextual draft reply in your inbox
+5. Marks the email as read after processing
 
 ---
 
 ## 📷 Screenshots
 
-*(Add screenshots showing a before/after of email + draft reply in Zoho Mail)*
+*Coming soon – before/after examples of Zoho Mail draft replies*
 
 ---
 
 ## ✅ To-Do / Improvements
 
-* Add UI for manual review
-* Scheduled background tasks
-* Gmail & Outlook support
-* Language style customization
+* [ ] Add UI for manual review
+* [ ] Scheduled background tasks
+* [ ] Gmail & Outlook support
+* [ ] Style and tone customization
 
 ---
 
 ## 🧠 License
 
-MIT – Use it freely and improve it as needed.
+MIT – Use it freely, improve it as needed, and contribute back!
 
 ---
